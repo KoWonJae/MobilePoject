@@ -3,8 +3,11 @@ package com.example.mobilepoject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.mobilepoject.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -21,57 +24,39 @@ class MainActivity : AppCompatActivity() {
         ///commit test by wonjae
     }
 
-    private fun init(){
+    private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.apply {
-            buttonRegister.setOnClickListener {
-                // RegisterActivity로 이동
-                val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-
-            buttonLogin.setOnClickListener {
-                // 아이디 비밀번호를 입력으로 로그인
-                if (binding.editTextEmail.text.toString() != "" && binding.editTextPassword.text.toString() != "") {
-                    loginUser(binding.editTextEmail.text.toString(), binding.editTextPassword.text.toString())
-                } else {
-                    Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show()
-                }
-            }
+        if(firebaseAuth.currentUser == null) {
+            // 계정이 로그인 되어있지 않으면 LoginActivity로 이동
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
-        firebaseAuthListener = FirebaseAuth.AuthStateListener {
-            // 로그인이 되어있으면 MainActivity로 이동
-            val firebaseUser = firebaseAuth.currentUser
-            if(firebaseUser != null) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
+        adapter = MyFragmentStateAdapter(this)
+        binding.viewpager2.adapter = adapter
+
+        TabLayoutMediator(binding.tablayout, binding.viewpager2) {
+                tab, position ->
+            tab.text = tabTitleArr[position]
+        }.attach()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.actionbar_action, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.action_menu) {
+            firebaseAuth.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        firebaseAuth?.addAuthStateListener { firebaseAuthListener!! }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        firebaseAuth?.addAuthStateListener { firebaseAuthListener!! }
-    }
-
-    fun loginUser(email :String, password:String) {
-        // 로그인 정보 확인하는 함수
-        firebaseAuth?.signInWithEmailAndPassword(email, password)
-            ?.addOnCompleteListener(this) {task ->
-                if(task.isSuccessful) {
-                    Toast.makeText(this, "로그인 성공.", Toast.LENGTH_LONG).show()
-                    firebaseAuth.addAuthStateListener(firebaseAuthListener)
-                } else {
-                    Toast.makeText(this, "로그인 실패.", Toast.LENGTH_LONG).show()
-                }
-            }
     }
 }
