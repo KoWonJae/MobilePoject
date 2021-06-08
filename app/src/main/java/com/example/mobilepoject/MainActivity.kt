@@ -1,17 +1,16 @@
 package com.example.mobilepoject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mobilepoject.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding:ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     val tabTitleArr = arrayListOf<String>("프로필", "검색", "채팅") // 탭바 타이틀
     lateinit var adapter : MyFragmentStateAdapter
     lateinit var firebaseAuth: FirebaseAuth
@@ -21,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-        ///commit test by wonjae
     }
 
     private fun init() {
