@@ -4,20 +4,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#62727b"
+    tools:context=".ProfileFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_margin="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:scaleType="fitXY"
+        android:background="#62727b"
+        android:src="@drawable/ic_baseline_settings_24" />
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="#62727b">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            tools:src="@color/white" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/pname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="이름"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager2"
+        <TextView
+            android:padding="10dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="이메일" />
+
+        <TextView
+            android:id="@+id/pemail"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/round_btn"
+            android:text="dfdfdf"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-        />
+        <TextView
+            android:padding="10dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="전화번호" />
+
+        <TextView
+            android:id="@+id/pnumber"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/round_btn"
+            android:text="dfdfdf"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:padding="10dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="태그" />
+
+        <TextView
+            android:id="@+id/ptag"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/round_btn"
+            android:text="dfdfdf"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="검색" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="채팅목록" />
 
 </LinearLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MainActivity"-->
+<!--    android:orientation="vertical">-->
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tablayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        />-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/viewpager2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+
+<!--        />-->
+
+<!--</LinearLayout>-->
