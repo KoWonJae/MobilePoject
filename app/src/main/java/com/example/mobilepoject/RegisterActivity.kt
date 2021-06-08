@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.mobilepoject.databinding.ActivityRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var firebaseAuth: FirebaseAuth
-    lateinit var binding : ActivityRegisterBindingg
+    lateinit var binding : ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
