@@ -32,13 +32,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter = MyFragmentStateAdapter(this)
-        binding.viewpager2.adapter = adapter
-
-        TabLayoutMediator(binding.tablayout, binding.viewpager2) {
-                tab, position ->
-            tab.text = tabTitleArr[position]
-        }.attach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
