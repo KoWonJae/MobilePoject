@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             firebaseAuth.signOut()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
+            finishAffinity()
             return true
         } else {
             return super.onOptionsItemSelected(item)
