@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
                 // 아이디 비밀번호를 입력으로 로그인
                 if (binding.editTextEmail.text.toString() != "" && binding.editTextPassword.text.toString() != "") {
                     loginUser(binding.editTextEmail.text.toString(), binding.editTextPassword.text.toString())
+                    //finish()
                 } else {
                     Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show()
                 }
