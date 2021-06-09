@@ -30,7 +30,7 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.apply {
             fun clearInput(){
-                pname.text.clear()
+                //pname.text.clear()
                 pnumber.text.clear()
                 pemail.text.clear()
                 precord.text.clear()

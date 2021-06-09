@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
@@ -10,24 +11,68 @@
         android:id="@+id/from_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/white"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_chat_user_row"
         android:maxWidth="240dp"
-        android:padding="16dp"
-        android:text="my messageaaaaaaaaaaaaaaaaaaaaa"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toStartOf="@+id/from_imageview"
-        app:layout_constraintTop_toTopOf="@+id/from_imageview" />
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:text="my message"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/from_imageview"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="fitXY"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/round_btn" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/from_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_chat_user_row"
+            android:scaleType="fitXY"
+            app:srcCompat="@color/black" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginBottom="8dp">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/from_textview"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="@android:color/white"-->
+<!--        android:maxWidth="240dp"-->
+<!--        android:padding="16dp"-->
+<!--        android:text="my messageaaaaaaaaaaaaaaaaaaaaa"-->
+<!--        android:textColor="@android:color/black"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/from_imageview"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/from_imageview" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/from_imageview"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:scaleType="fitXY"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/round_btn" />-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
