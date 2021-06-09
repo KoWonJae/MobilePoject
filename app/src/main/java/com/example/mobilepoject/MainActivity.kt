@@ -9,8 +9,7 @@ import com.example.mobilepoject.databinding.ActivityMainBinding
 import com.example.mobilepoject.messenger.MessageActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -33,6 +32,24 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
+        } else {
+            // 로그인 되어있다면 사용자의 프로필 출력
+            val uid = firebaseAuth.currentUser?.uid
+            rdb.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //TODO("Not yet implemented")
+                    binding.apply {
+                        pemail.text = snapshot.child(uid!!).child("email").value.toString()
+                        pname.text = snapshot.child(uid!!).child("name").value.toString()
+                        pnumber.text = snapshot.child(uid!!).child("phoneNumber").value.toString()
+                        ptag.text = snapshot.child(uid!!).child("tag").value.toString()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    //TODO("Not yet implemented")
+                }
+            })
         }
 
         binding.searchBtn.setOnClickListener {
@@ -51,11 +68,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        var userEmail = intent.getStringExtra("email")
-        binding.pemail.setText(userEmail)
-        val query1 = rdb.orderByChild("email").equalTo(userEmail)
-        val rdb2 = FirebaseDatabase.getInstance().getReference("Profile/people/kwj12132@naver").child("email")
-        print(rdb2)
+//        var userEmail = intent.getStringExtra("email")
+//        binding.pemail.setText(userEmail)
+//        val query1 = rdb.orderByChild("email").equalTo(userEmail)
+//        val rdb2 = FirebaseDatabase.getInstance().getReference("Profile/people/kwj12132@naver").child("email")
+//        print(rdb2)
+
 
 //        val query = rdb.child(pname.text.toString()).child("name")
 
