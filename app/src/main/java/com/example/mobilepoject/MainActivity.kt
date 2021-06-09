@@ -9,10 +9,13 @@ import com.example.mobilepoject.databinding.ActivityMainBinding
 import com.example.mobilepoject.messenger.MessageActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var firebaseAuth: FirebaseAuth
+    lateinit var rdb: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
+        rdb = FirebaseDatabase.getInstance().getReference("Profile/people")
 
         if(firebaseAuth.currentUser == null) {
             // 계정이 로그인 되어있지 않으면 LoginActivity로 이동
@@ -45,6 +49,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
         }
+
+
+        var userEmail = intent.getStringExtra("email")
+        binding.pemail.setText(userEmail)
+        val query1 = rdb.orderByChild("email").equalTo(userEmail)
+        val rdb2 = FirebaseDatabase.getInstance().getReference("Profile/people/kwj12132@naver").child("email")
+        print(rdb2)
+
+//        val query = rdb.child(pname.text.toString()).child("name")
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -53,6 +53,9 @@ class LoginActivity : AppCompatActivity() {
             val firebaseUser = firebaseAuth.currentUser
             if(firebaseUser != null) {
                 val intent = Intent(this, MainActivity::class.java)
+                // intent로 MainActivity에 email전달
+                val uesrid = FirebaseAuth.getInstance().currentUser?.uid
+                intent.putExtra("email", reviseEmail(binding.editTextEmail.text.toString()))
                 startActivity(intent)
             }
         }
@@ -66,6 +69,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         firebaseAuth?.addAuthStateListener { firebaseAuthListener!! }
+    }
+
+    fun reviseEmail(email :String) : String {
+        val rEmail = email.replace(".com", "")
+        return rEmail
     }
 
     fun loginUser(email :String, password:String) {

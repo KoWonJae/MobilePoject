@@ -41,12 +41,12 @@
             android:text="number" />
 
         <EditText
-            android:id="@+id/pgrade"
+            android:id="@+id/pemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="grade" />
+            android:text="email" />
 
         <EditText
             android:id="@+id/precord"

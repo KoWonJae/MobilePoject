@@ -32,17 +32,22 @@ class ProfileActivity : AppCompatActivity() {
             fun clearInput(){
                 pname.text.clear()
                 pnumber.text.clear()
-                pgrade.text.clear()
+                pemail.text.clear()
                 precord.text.clear()
                 ptag.text.clear()
+            }
+
+            fun reviseEmail(email :String) : String {
+                val rEmail = email.replace(".com", "")
+                return rEmail
             }
 
             button.setOnClickListener {
                 try {
                     val item = Profile(pname.text.toString()
-                        ,pnumber.text.toString().toInt(), pgrade.text.toString(),
+                        ,pnumber.text.toString().toInt(), pemail.text.toString(),
                         precord.text.toString(), ptag.text.toString())
-                    rdb.child(pname.text.toString()).setValue(item)//ID
+                    rdb.child(reviseEmail(pemail.text.toString())).setValue(item)//ID
                     Toast.makeText(this@ProfileActivity,"프로필 저장", Toast.LENGTH_SHORT).show()
 
                 } catch (e: java.lang.NumberFormatException){
@@ -51,6 +56,8 @@ class ProfileActivity : AppCompatActivity() {
 //                clearInput()
 
             }
+
+
 
 
         }

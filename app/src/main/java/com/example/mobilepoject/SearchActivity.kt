@@ -21,7 +21,7 @@ class SearchActivity : AppCompatActivity() {
     lateinit var rdb: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
@@ -43,9 +43,9 @@ class SearchActivity : AppCompatActivity() {
                     val intent = Intent(this@SearchActivity, RecycleProfileActivity::class.java)
                     val newProfile = adapter.getItem(positon)
                     intent.putExtra("my_data", adapter.getItem(positon).name);
-                    intent.putExtra("grade", adapter.getItem(positon).grade);
+                    intent.putExtra("grade", adapter.getItem(positon).email);
                     intent.putExtra("phoneNumber", adapter.getItem(positon).phoneNumber);
-                    intent.putExtra("record", adapter.getItem(positon).record);
+                    intent.putExtra("record", adapter.getItem(positon).selfinfo);
                     intent.putExtra("tag", adapter.getItem(positon).tag);
                     startActivity(intent)
                 }
@@ -81,9 +81,9 @@ class SearchActivity : AppCompatActivity() {
                             val newProfile = adapter.getItem(positon)
 //                            intent.putExtra("my_datas", adapter.getItem(positon))
                             intent.putExtra("my_data", adapter.getItem(positon).name);
-                            intent.putExtra("grade", adapter.getItem(positon).grade);
+                            intent.putExtra("grade", adapter.getItem(positon).email);
                             intent.putExtra("phoneNumber", adapter.getItem(positon).phoneNumber);
-                            intent.putExtra("record", adapter.getItem(positon).record);
+                            intent.putExtra("record", adapter.getItem(positon).selfinfo);
                             intent.putExtra("tag", adapter.getItem(positon).tag);
 
 
@@ -96,9 +96,6 @@ class SearchActivity : AppCompatActivity() {
             }
 
         }
-
-
-
 //        adapter.itemClickListener = object :MyProfileAdapter.OnItemClickListener{
 //            override fun OnItemClick(view: View, positon: Int) {
 //                binding.apply{
@@ -108,12 +105,8 @@ class SearchActivity : AppCompatActivity() {
 //                }
 //            }
 //        }
-
         //data search_word from edittext and query for searching by name of profile
         val search_word =findViewById<EditText>(R.id.editText).text.toString()
-
-//        val query = table.orderByChild("name").equalTo(search_word)
-
         //검색문
 
     }
