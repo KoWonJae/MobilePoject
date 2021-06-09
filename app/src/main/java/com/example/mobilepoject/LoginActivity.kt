@@ -3,9 +3,16 @@ package com.example.mobilepoject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.mobilepoject.databinding.ActivityLoginBinding
+import com.example.mobilepoject.messenger.MessageActivity
+import com.example.mobilepoject.messenger.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
     lateinit var firebaseAuth: FirebaseAuth
@@ -68,8 +75,25 @@ class LoginActivity : AppCompatActivity() {
                 if(task.isSuccessful) {
                     Toast.makeText(this, "로그인 성공.", Toast.LENGTH_LONG).show()
                     firebaseAuth.addAuthStateListener(firebaseAuthListener)
+
+                    val uid = firebaseAuth.uid
+                    val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+                    ref.addListenerForSingleValueEvent(object: ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            MessageActivity.currentUser = snapshot.getValue(User::class.java)
+                            val username = MessageActivity.currentUser?.username
+                            Toast.makeText(this@LoginActivity, username + " 님, 환영합니다.", Toast.LENGTH_SHORT).show()
+                            Log.d("User", "Current User ${MessageActivity.currentUser?.username}")
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+
+                        }
+                    })
                 } else {
                     Toast.makeText(this, "로그인 실패.", Toast.LENGTH_LONG).show()
+                    binding.editTextEmail.text.clear()
+                    binding.editTextPassword.text.clear()
                 }
             }
     }

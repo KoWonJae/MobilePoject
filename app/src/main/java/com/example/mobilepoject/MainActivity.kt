@@ -6,13 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobilepoject.databinding.ActivityMainBinding
+import com.example.mobilepoject.messenger.MessageActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    val tabTitleArr = arrayListOf<String>("프로필", "검색", "채팅") // 탭바 타이틀
-    lateinit var adapter : MyFragmentStateAdapter
     lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +37,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.settingBtn.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 채팅 목록으로 가기
+        binding.chatBtn.setOnClickListener {
+            val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
         }
     }

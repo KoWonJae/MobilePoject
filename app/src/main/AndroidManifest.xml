@@ -9,10 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MobilePoject">
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".messenger.ChatActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".messenger.MessageActivity" />
+        </activity>
+        <activity android:name=".messenger.MessageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".RecycleProfileActivity" />
-        <activity android:name=".Profile" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".RegisterActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+        </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services' //2021-06-08
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -47,9 +48,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1' //2021-06-05
     implementation 'com.google.firebase:firebase-database:20.0.0' //2021-06-05
     implementation 'com.firebaseui:firebase-ui-database:7.1.1' //2021-06-05
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'//2021-06-05
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation "com.github.lisawray.groupie:groupie:2.9.0"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.9.0"
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
