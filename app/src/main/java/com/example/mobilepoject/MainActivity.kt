@@ -32,24 +32,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        } else {
-            // 로그인 되어있다면 사용자의 프로필 출력
-            val uid = firebaseAuth.currentUser?.uid
-            rdb.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    //TODO("Not yet implemented")
-                    binding.apply {
-                        pemail.text = snapshot.child(uid!!).child("email").value.toString()
-                        pname.text = snapshot.child(uid!!).child("name").value.toString()
-                        pnumber.text = snapshot.child(uid!!).child("phoneNumber").value.toString()
-                        ptag.text = snapshot.child(uid!!).child("tag").value.toString()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    //TODO("Not yet implemented")
-                }
-            })
         }
 
         binding.searchBtn.setOnClickListener {
@@ -67,13 +49,27 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // 현재 로그인한 사용자의 정보로 editText text 변경
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        rdb.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.apply {
+                    pemail.setText(snapshot.child(uid!!).child("email").value.toString())
+                    pname.setText(snapshot.child(uid!!).child("name").value.toString())
+                    precord.setText(snapshot.child(uid!!).child("selfinfo").value.toString())
+                    pnumber.setText(snapshot.child(uid!!).child("phoneNumber").value.toString())
+                    ptag.setText(snapshot.child(uid!!).child("tag").value.toString())
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
-//        var userEmail = intent.getStringExtra("email")
-//        binding.pemail.setText(userEmail)
-//        val query1 = rdb.orderByChild("email").equalTo(userEmail)
-//        val rdb2 = FirebaseDatabase.getInstance().getReference("Profile/people/kwj12132@naver").child("email")
-//        print(rdb2)
-
+        var userEmail = intent.getStringExtra("email")
+        binding.pemail.setText(userEmail)
+        val query1 = rdb.orderByChild("email").equalTo(userEmail)
+        val rdb2 = FirebaseDatabase.getInstance().getReference("Profile/people/kwj12132@naver").child("email")
+        print(rdb2)
 
 //        val query = rdb.child(pname.text.toString()).child("name")
 
