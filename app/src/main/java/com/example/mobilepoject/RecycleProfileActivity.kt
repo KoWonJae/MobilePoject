@@ -13,7 +13,7 @@ class RecycleProfileActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_recycle_profile)
         binding = ActivityRecycleProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.title = "프로필"
         init()
     }
 
