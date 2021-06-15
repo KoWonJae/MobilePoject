@@ -30,7 +30,7 @@ class RecycleProfileActivity : AppCompatActivity() {
         binding.apply {
             pname.setText(myData)
             pemail.setText(grade)
-//            pnumber.setText(number)
+            pnumber.setText(number.toString())
             precord.setText(record)
             ptag.setText(tag)
 
