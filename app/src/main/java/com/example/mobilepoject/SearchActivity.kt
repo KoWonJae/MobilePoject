@@ -31,7 +31,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun init(){
         layoutManager  = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rdb = FirebaseDatabase.getInstance().getReference("Profile/people")
+        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
         val query = rdb.limitToLast(50)
         val option = FirebaseRecyclerOptions.Builder<Profile>()
             .setQuery(query, Profile::class.java)

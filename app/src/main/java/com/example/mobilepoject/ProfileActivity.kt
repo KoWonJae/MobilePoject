@@ -23,7 +23,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        rdb = FirebaseDatabase.getInstance().getReference("Profile/people")
+        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
         val query = rdb.limitToLast(50)
         val option = FirebaseRecyclerOptions.Builder<Profile>()
             .setQuery(query, Profile::class.java)
@@ -49,11 +49,13 @@ class ProfileActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     //TODO("Not yet implemented")
                     binding.apply {
-                        pemail.setText(snapshot.child(uid!!).child("email").value.toString())
-                        pname.setText(snapshot.child(uid!!).child("name").value.toString())
-                        precord.setText(snapshot.child(uid!!).child("selfinfo").value.toString())
-                        pnumber.setText(snapshot.child(uid!!).child("phoneNumber").value.toString())
-                        ptag.setText(snapshot.child(uid!!).child("tag").value.toString())
+                        if(uid != null) {
+                            pemail.setText(snapshot.child(uid).child("email").value.toString())
+                            pname.setText(snapshot.child(uid).child("name").value.toString())
+                            precord.setText(snapshot.child(uid).child("selfinfo").value.toString()                            )
+                            pnumber.setText(snapshot.child(uid).child("phoneNumber").value.toString()                            )
+                            ptag.setText(snapshot.child(uid).child("tag").value.toString())
+                        }
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -77,7 +79,7 @@ class ProfileActivity : AppCompatActivity() {
                 // 버튼을 누르면 editText text로 사용자의 데이터 변경
                 try {
                     val item = Profile(pname.text.toString()
-                        ,pnumber.text.toString().toInt(), pemail.text.toString(),
+                        ,pnumber.text.toString().toString(), pemail.text.toString(),
                         precord.text.toString(), ptag.text.toString())
                     rdb.child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(item)//ID
                     Toast.makeText(this@ProfileActivity,"프로필 저장", Toast.LENGTH_SHORT).show()

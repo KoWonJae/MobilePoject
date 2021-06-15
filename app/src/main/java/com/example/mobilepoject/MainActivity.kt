@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
-        rdb = FirebaseDatabase.getInstance().getReference("Profile/people")
+        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
 
         if(firebaseAuth.currentUser == null) {
             // 계정이 로그인 되어있지 않으면 LoginActivity로 이동
@@ -56,11 +56,11 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     if(uid != null) {
-                        pemail.setText(snapshot.child(uid!!).child("email").value.toString())
-                        pname.setText(snapshot.child(uid!!).child("name").value.toString())
-                        precord.setText(snapshot.child(uid!!).child("selfinfo").value.toString())
-                        pnumber.setText(snapshot.child(uid!!).child("phoneNumber").value.toString())
-                        ptag.setText(snapshot.child(uid!!).child("tag").value.toString())
+                        pemail.setText(snapshot.child(uid).child("email").value.toString())
+                        pname.setText(snapshot.child(uid).child("name").value.toString())
+                        precord.setText(snapshot.child(uid).child("selfinfo").value.toString())
+                        pnumber.setText(snapshot.child(uid).child("phoneNumber").value.toString())
+                        ptag.setText(snapshot.child(uid).child("tag").value.toString())
                     }
                 }
             }
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         var userEmail = intent.getStringExtra("email")
         binding.pemail.setText(userEmail)
         val query1 = rdb.orderByChild("email").equalTo(userEmail)
-        val rdb2 = FirebaseDatabase.getInstance().getReference("Profile/people/kwj12132@naver").child("email")
+        val rdb2 = FirebaseDatabase.getInstance().getReference("Profiles/people/kwj12132@naver").child("email")
         print(rdb2)
 
 //        val query = rdb.child(pname.text.toString()).child("name")

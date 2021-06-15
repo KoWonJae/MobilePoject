@@ -11,6 +11,7 @@ import com.example.mobilepoject.databinding.ActivityRegisterBinding
 import com.example.mobilepoject.messenger.MessageActivity
 import com.example.mobilepoject.messenger.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
@@ -18,7 +19,7 @@ import java.util.*
 class RegisterActivity : AppCompatActivity() {
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var binding : ActivityRegisterBinding
-
+    lateinit var rdb :DatabaseReference
     var selectedPhotoUri: Uri? = null
     // startActivityForResult가 이걸로 바뀜
     val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -55,6 +56,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun createUser(email : String, password:String) {
         // 계정을 생성하는 함수
         firebaseAuth?.createUserWithEmailAndPassword(email, password)
@@ -69,9 +71,18 @@ class RegisterActivity : AppCompatActivity() {
 
 //                Log.d("Main", "계정 생성 성공 with uid: ${task.result!!.user?.uid}")
                 Toast.makeText(this, "계정 생성 성공.", Toast.LENGTH_LONG).show()
+
+                // 가입한 사용자의 임시 프로필을 만들어 데이터베이스에 삽입
+                val profile = Profile()
+                profile.email = email
+                profile.name = binding.nameEdit.text.toString()
+                rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
+                rdb.child(firebaseAuth?.currentUser!!.uid).setValue(profile)
+
                 val loginUser = firebaseAuth?.currentUser
 
                 // 회원정보 등록(Firebase Database & Storage)
+                // 파라미터 제거
                 saveUserToFirebaseDatabase()
 
             }.addOnFailureListener {
@@ -82,6 +93,8 @@ class RegisterActivity : AppCompatActivity() {
 
     // Firebase Database에 회원 등록한 사람 추가
     private fun saveUserToFirebaseDatabase() {
+        //파라미터 제거
+
         if(selectedPhotoUri == null) return
 
         val uid = firebaseAuth.uid!!
@@ -90,7 +103,8 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.setValue(user)
             .addOnSuccessListener {
-//                Log.d("Register", "유저 등록됨")
+                Log.i("Register", "유저 등록됨")
+
                 uploadImageToFirebaseStorage()
 
                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
