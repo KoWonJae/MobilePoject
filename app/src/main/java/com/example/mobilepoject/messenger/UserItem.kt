@@ -1,9 +1,9 @@
 package com.example.mobilepoject.messenger
 
-import android.graphics.BitmapFactory
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.mobilepoject.R
+import com.example.mobilepoject.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -12,7 +12,10 @@ class UserItem(val user: User): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.username_textview).text = user.username
 
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.userimage_imageview))
+        // 프로필 이미지 없으면 빈칸, 있으면 보여주기
+        if(user.profileImageUrl != ""){
+            Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.userimage_imageview))
+        }
     }
 
     override fun getLayout(): Int {

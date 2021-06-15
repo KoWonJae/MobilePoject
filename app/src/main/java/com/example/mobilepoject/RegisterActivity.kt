@@ -8,8 +8,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.mobilepoject.databinding.ActivityRegisterBinding
-import com.example.mobilepoject.messenger.MessageActivity
-import com.example.mobilepoject.messenger.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -20,12 +18,14 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var binding : ActivityRegisterBinding
     lateinit var rdb :DatabaseReference
-    var selectedPhotoUri: Uri? = null
-    // startActivityForResult가 이걸로 바뀜
-    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result -> binding.photoBtn.setImageURI(result.data?.data)
-        selectedPhotoUri = result.data?.data
-    }
+
+    // 회원가입할 때 이미지 선택 안하면 지우고 하면 다시 살리면 됨 (지울지 살릴지?)
+//    var selectedPhotoUri: Uri? = null
+//    // startActivityForResult가 이걸로 바뀜
+//    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+//            result -> binding.photoBtn.setImageURI(result.data?.data)
+//        selectedPhotoUri = result.data?.data
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +37,13 @@ class RegisterActivity : AppCompatActivity() {
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // 갤러리에서 이미지 선택
-        binding.photoBtn.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            // startActivityForResult가 이걸로 바뀜
-            getContent.launch(intent)
-        }
+        // 갤러리에서 이미지 선택 (지울지 살릴지?)
+//        binding.photoBtn.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            // startActivityForResult가 이걸로 바뀜
+//            getContent.launch(intent)
+//        }
 
         binding.buttonRegister.setOnClickListener {
             // 새로만들 계정의 아이디 비밀번호를 입력받음
@@ -73,16 +73,18 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "계정 생성 성공.", Toast.LENGTH_LONG).show()
 
                 // 가입한 사용자의 임시 프로필을 만들어 데이터베이스에 삽입
-                val profile = Profile()
-                profile.email = email
-                profile.name = binding.nameEdit.text.toString()
-                rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
-                rdb.child(firebaseAuth?.currentUser!!.uid).setValue(profile)
+
+                //// [재호 - Profile 클래스 -> User 클래스로 변경. User 클래스가 Profile 클래스 내용 다 포함하고 있음.]
+//                val profile = Profile()
+//                profile.email = email
+//                profile.name = binding.nameEdit.text.toString()
+//                rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
+//                rdb.child(firebaseAuth?.currentUser!!.uid).setValue(profile)
 
                 val loginUser = firebaseAuth?.currentUser
 
-                // 회원정보 등록(Firebase Database & Storage)
-                // 파라미터 제거
+                // 회원정보 파이어베이스 데이터베이스에 등록(Firebase Database & Storage)
+//                saveUser()
                 saveUserToFirebaseDatabase()
 
             }.addOnFailureListener {
@@ -91,21 +93,43 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    // Firebase Database에 회원 등록한 사람 추가
+    // 유저 등록 (지울지 살릴지?)
+//    private fun saveUser() {
+//        // 프로필 사진이 없으면 그냥 Database에만 추가
+//        if(selectedPhotoUri == null){
+//            saveUserToFirebaseDatabase()
+//        }
+//        // 프로필 사진이 있으면 Storage에도 추가, Database에도 추가
+//        else{
+//            val filename = UUID.randomUUID().toString()
+//            val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+//
+//            ref.putFile(selectedPhotoUri!!)
+//                .addOnSuccessListener {
+//                    Log.d("Register", "이미지 업로드 성공: ${it.metadata?.path}")
+//
+//                    ref.downloadUrl.addOnSuccessListener {
+//                        Log.d("Register", "파일 위치: $it")
+//
+//                        // 사진이 storage에 등록이 되면 firebase database에 유저 추가
+//                        saveUserToFirebaseDatabaseAndStorage(it.toString())
+//                    }
+//                }.addOnFailureListener {}
+//        }
+//    }
+
+    // Firebase Database에 등록한 사람 추가 (no 사진)
     private fun saveUserToFirebaseDatabase() {
-        //파라미터 제거
-
-        if(selectedPhotoUri == null) return
-
+        val user = User()
         val uid = firebaseAuth.uid!!
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user = User(uid, binding.nameEdit.text.toString(), selectedPhotoUri.toString())
+        user.uid = uid
+        user.email = binding.editTextEmail.text.toString()
+        user.username = binding.nameEdit.text.toString()
 
-        ref.setValue(user)
+        rdb = FirebaseDatabase.getInstance().getReference("users/people/$uid")
+        rdb.setValue(user)
             .addOnSuccessListener {
                 Log.i("Register", "유저 등록됨")
-
-                uploadImageToFirebaseStorage()
 
                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                 startActivity(intent)
@@ -114,20 +138,24 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    // Firebase Storage에 사진 업로드
-    private fun uploadImageToFirebaseStorage() {
-        val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+    // Firebase Storage에 사진 업로드 + Database에 유저 추가
+    private fun saveUserToFirebaseDatabaseAndStorage(profileImageUrl: String) {
+        val user = User()
+        val uid = firebaseAuth.uid!!
+        user.uid = uid
+        user.email = binding.editTextEmail.text.toString()
+        user.username = binding.nameEdit.text.toString()
+        user.profileImageUrl = profileImageUrl
 
-        ref.putFile(selectedPhotoUri!!)
+        rdb = FirebaseDatabase.getInstance().getReference("users/people/$uid")
+        rdb.setValue(user)
             .addOnSuccessListener {
-//                Log.d("Register", "이미지 업로드 성공: ${it.metadata?.path}")
+                Log.i("Register", "유저 등록됨")
 
-                ref.downloadUrl.addOnSuccessListener {
-//                    Log.d("Register", "파일 위치: $it")
-                }
+                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                startActivity(intent)
             }.addOnFailureListener {
-//                    Log.d("Register", "이미지 업로드 실패: $it")
+//                Log.d("Register", "유저 등록 실패: ${it.message}")
             }
     }
 }

@@ -3,6 +3,7 @@ package com.example.mobilepoject.messenger
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.mobilepoject.R
+import com.example.mobilepoject.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,13 +24,15 @@ class LatestMessageItem(val chatMessage: ChatMessage): Item<GroupieViewHolder>()
             chatPartnerId = chatMessage.fromId
         }
 
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/people/$chatPartnerId")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 chatPartnerUser = snapshot.getValue(User::class.java)
                 viewHolder.itemView.findViewById<TextView>(R.id.username_textview).text = chatPartnerUser?.username
 
-                Picasso.get().load(chatPartnerUser?.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.userimage_imageview))
+                if(chatPartnerUser?.profileImageUrl != ""){
+                    Picasso.get().load(chatPartnerUser?.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.userimage_imageview))
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

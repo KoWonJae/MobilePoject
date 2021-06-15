@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import com.example.mobilepoject.databinding.ActivityLoginBinding
 import com.example.mobilepoject.messenger.MessageActivity
-import com.example.mobilepoject.messenger.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -53,9 +52,14 @@ class LoginActivity : AppCompatActivity() {
             val firebaseUser = firebaseAuth.currentUser
             if(firebaseUser != null) {
                 val intent = Intent(this, MainActivity::class.java)
+                // 뒤로가기 눌러도 다시 이 화면으로 안 돌아옴
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                // [재호 - 이거 필요한가요~?]
                 // intent로 MainActivity에 email전달
+//                intent.putExtra("email", reviseEmail(binding.editTextEmail.text.toString()))
+
                 val uesrid = FirebaseAuth.getInstance().currentUser?.uid
-                intent.putExtra("email", reviseEmail(binding.editTextEmail.text.toString()))
                 startActivity(intent)
             }
         }
@@ -71,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth?.addAuthStateListener { firebaseAuthListener!! }
     }
 
+    // [재호 - 이거(reviseEmail 함수) 필요한가요~?]
     fun reviseEmail(email :String) : String {
         val rEmail = email.replace(".com", "")
         return rEmail
@@ -85,7 +90,9 @@ class LoginActivity : AppCompatActivity() {
                     firebaseAuth.addAuthStateListener(firebaseAuthListener)
 
                     val uid = firebaseAuth.uid
-                    val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+//                    val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+                    // 파이어베이스 Profiles -> users 로 통합
+                    val ref = FirebaseDatabase.getInstance().getReference("/users/people/$uid")
                     ref.addListenerForSingleValueEvent(object: ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             MessageActivity.currentUser = snapshot.getValue(User::class.java)

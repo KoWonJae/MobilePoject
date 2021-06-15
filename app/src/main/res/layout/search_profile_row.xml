@@ -36,13 +36,13 @@
         android:textColorHint="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tag_textView"
+        app:layout_constraintBottom_toTopOf="@+id/profileTag"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="User Name" />
 
     <TextView
-        android:id="@+id/tag_textView"
+        android:id="@+id/profileTag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

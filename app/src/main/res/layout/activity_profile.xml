@@ -22,7 +22,7 @@
             app:cardBackgroundColor="#62727b"
             app:cardCornerRadius="50dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/pimage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

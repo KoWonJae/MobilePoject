@@ -10,6 +10,7 @@ import com.example.mobilepoject.messenger.MessageActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -26,7 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
-        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
+//        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
+        // 파이어베이스 Profiles -> users 로 통합
+        rdb = FirebaseDatabase.getInstance().getReference("users/people")
 
         if(firebaseAuth.currentUser == null) {
             // 계정이 로그인 되어있지 않으면 LoginActivity로 이동
@@ -56,11 +59,23 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     if(uid != null) {
-                        pemail.setText(snapshot.child(uid).child("email").value.toString())
-                        pname.setText(snapshot.child(uid).child("name").value.toString())
-                        precord.setText(snapshot.child(uid).child("selfinfo").value.toString())
-                        pnumber.setText(snapshot.child(uid).child("phoneNumber").value.toString())
-                        ptag.setText(snapshot.child(uid).child("tag").value.toString())
+                        val currentUser = snapshot.child(uid)
+                        // 프로필 이미지 그리기
+                        if(currentUser.child("profileImageUrl").value.toString() != ""){
+                            Picasso.get().load(currentUser.child("profileImageUrl").value.toString()).into(pimage)
+                        }
+                        // 프로필 텍스트 넣기
+                        pname.setText(currentUser.child("username").value.toString())
+                        pemail.setText(currentUser.child("email").value.toString())
+                        precord.setText(currentUser.child("selfinfo").value.toString()                            )
+                        pnumber.setText(currentUser.child("phoneNumber").value.toString()                            )
+                        ptag.setText(currentUser.child("tag").value.toString())
+
+//                        pemail.setText(snapshot.child(uid).child("email").value.toString())
+//                        pname.setText(snapshot.child(uid).child("name").value.toString())
+//                        precord.setText(snapshot.child(uid).child("selfinfo").value.toString())
+//                        pnumber.setText(snapshot.child(uid).child("phoneNumber").value.toString())
+//                        ptag.setText(snapshot.child(uid).child("tag").value.toString())
                     }
                 }
             }
@@ -68,11 +83,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        var userEmail = intent.getStringExtra("email")
-        binding.pemail.setText(userEmail)
-        val query1 = rdb.orderByChild("email").equalTo(userEmail)
-        val rdb2 = FirebaseDatabase.getInstance().getReference("Profiles/people/kwj12132@naver").child("email")
-        print(rdb2)
+//        var userEmail = intent.getStringExtra("email")
+//        binding.pemail.setText(userEmail)
+//        val query1 = rdb.orderByChild("email").equalTo(userEmail)
+//        val rdb2 = FirebaseDatabase.getInstance().getReference("Profiles/people/kwj12132@naver").child("email")
+//        print(rdb2)
 
 //        val query = rdb.child(pname.text.toString()).child("name")
 

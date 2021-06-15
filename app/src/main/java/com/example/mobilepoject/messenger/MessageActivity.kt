@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.mobilepoject.R
-import com.example.mobilepoject.RegisterActivity
+import com.example.mobilepoject.User
 import com.example.mobilepoject.databinding.ActivityMessageBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -52,10 +51,10 @@ class MessageActivity : AppCompatActivity() {
 //            checkUserLoggedIn()
 
             // [테스트용] Firebase에 등록된 모든 사용자 목록
-            fetchUsers()
+//            fetchUsers()
 
             // [실전용] 나와 채팅중인 사용자 목록
-//            fectchMessagingUsers()
+            fectchMessagingUsers()
         }
     }
 
@@ -101,7 +100,7 @@ class MessageActivity : AppCompatActivity() {
 
     // Firebase에서 전체 유저 정보 가져와서 리스트로 보여주기
     private fun fetchUsers() {
-        val ref = FirebaseDatabase.getInstance().getReference("/users")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/people")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
@@ -134,7 +133,7 @@ class MessageActivity : AppCompatActivity() {
     // Firebase에서 내 정보 가져오기
     private fun fetchMe() {
         val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/people/$uid")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 currentUser = snapshot.getValue(User::class.java)
