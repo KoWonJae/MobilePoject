@@ -36,11 +36,11 @@
             android:text="검색" />
     </LinearLayout>
 
-    <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="add Profile" />
+<!--    <Button-->
+<!--            android:id="@+id/button2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="add Profile" />-->
 
 
     <androidx.recyclerview.widget.RecyclerView

@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "내 프로필"
         init()
     }
 
@@ -54,11 +55,13 @@ class MainActivity : AppCompatActivity() {
         rdb.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
-                    pemail.setText(snapshot.child(uid!!).child("email").value.toString())
-                    pname.setText(snapshot.child(uid!!).child("name").value.toString())
-                    precord.setText(snapshot.child(uid!!).child("selfinfo").value.toString())
-                    pnumber.setText(snapshot.child(uid!!).child("phoneNumber").value.toString())
-                    ptag.setText(snapshot.child(uid!!).child("tag").value.toString())
+                    if(uid != null) {
+                        pemail.setText(snapshot.child(uid!!).child("email").value.toString())
+                        pname.setText(snapshot.child(uid!!).child("name").value.toString())
+                        precord.setText(snapshot.child(uid!!).child("selfinfo").value.toString())
+                        pnumber.setText(snapshot.child(uid!!).child("phoneNumber").value.toString())
+                        ptag.setText(snapshot.child(uid!!).child("tag").value.toString())
+                    }
                 }
             }
             override fun onCancelled(error: DatabaseError) {

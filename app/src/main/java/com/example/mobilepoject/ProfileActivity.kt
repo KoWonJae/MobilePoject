@@ -18,6 +18,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "프로필 수정"
         init()
     }
 
@@ -85,6 +86,7 @@ class ProfileActivity : AppCompatActivity() {
                     Toast.makeText(this@ProfileActivity,"번호에 '-'를 제외한 숫자를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 }
 //                clearInput()
+                finish()
             }
 
 

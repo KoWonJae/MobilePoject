@@ -24,6 +24,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "다른 사람 검색"
         init()
 
     }
@@ -57,10 +58,10 @@ class SearchActivity : AppCompatActivity() {
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
 
-            button2.setOnClickListener {
-                val intent = Intent(this@SearchActivity, ProfileActivity::class.java)
-                startActivity(intent)
-            }
+//            button2.setOnClickListener {
+//                val intent = Intent(this@SearchActivity, ProfileActivity::class.java)
+//                startActivity(intent)
+//            }
 
             imageView.setOnClickListener{
                 if(adapter!=null)
