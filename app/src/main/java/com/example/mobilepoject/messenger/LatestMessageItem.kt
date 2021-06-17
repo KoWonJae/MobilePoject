@@ -33,6 +33,9 @@ class LatestMessageItem(val chatMessage: ChatMessage): Item<GroupieViewHolder>()
                 if(chatPartnerUser?.profileImageUrl != ""){
                     Picasso.get().load(chatPartnerUser?.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.userimage_imageview))
                 }
+                else{
+                    Picasso.get().load(R.drawable.round_white_edittext).into(viewHolder.itemView.findViewById<ImageView>(R.id.userimage_imageview))
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

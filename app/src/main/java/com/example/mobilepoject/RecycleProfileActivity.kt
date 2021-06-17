@@ -49,6 +49,9 @@ class RecycleProfileActivity : AppCompatActivity() {
             if(profileImageUrl != ""){
                 Picasso.get().load(profileImageUrl).into(pimage)
             }
+            else{
+                Picasso.get().load(R.drawable.round_white_edittext).into(pimage)
+            }
 
             startChatBtn.setOnClickListener {
                 val tempUser = User(uid!!, username!!, phoneNumber!!, email!!, selfinfo!!, tag!!, profileImageUrl!!, career!!, site!!)

@@ -49,6 +49,9 @@ class MyProfileAdapter(options: FirebaseRecyclerOptions<User>)
             if(model.profileImageUrl != ""){
                 Picasso.get().load(model.profileImageUrl).into(pimage)
             }
+            else{
+                Picasso.get().load(R.drawable.round_white_edittext).into(pimage)
+            }
 
         }
     }

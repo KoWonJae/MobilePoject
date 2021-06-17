@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
                         if(currentUser.child("profileImageUrl").value.toString() != ""){
                             Picasso.get().load(currentUser.child("profileImageUrl").value.toString()).into(pimage)
                         }
+                        else{
+                            Picasso.get().load(R.drawable.round_white_edittext).into(pimage)
+                        }
                         // 프로필 텍스트 넣기
                         pname.setText(currentUser.child("username").value.toString())
                         pemail.setText(currentUser.child("email").value.toString())

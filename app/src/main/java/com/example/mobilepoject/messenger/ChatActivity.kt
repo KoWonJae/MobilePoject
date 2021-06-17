@@ -145,7 +145,12 @@ class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.from_textview).text = text
 
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.from_imageview))
+        if(user.profileImageUrl != ""){
+            Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.from_imageview))
+        }
+        else{
+            Picasso.get().load(R.drawable.round_white_edittext).into(viewHolder.itemView.findViewById<ImageView>(R.id.from_imageview))
+        }
     }
 
     override fun getLayout(): Int {
@@ -158,7 +163,12 @@ class ChatToItem(val text: String, val user: User): Item<GroupieViewHolder>(){
         viewHolder.itemView.findViewById<TextView>(R.id.to_textview).text = text
 
         // 사용자 프로필 사진 보여주기
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.to_imageview))
+        if(user.profileImageUrl != ""){
+            Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.to_imageview))
+        }
+        else{
+            Picasso.get().load(R.drawable.round_white_edittext).into(viewHolder.itemView.findViewById<ImageView>(R.id.from_imageview))
+        }
     }
 
     override fun getLayout(): Int {
