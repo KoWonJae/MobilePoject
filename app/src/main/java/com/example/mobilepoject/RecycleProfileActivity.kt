@@ -58,10 +58,12 @@ class RecycleProfileActivity : AppCompatActivity() {
             }
 
             psite.setOnClickListener {
+                // {psite EditText에서 TextView로 바꿨습니다.}
                 val siteurl = psite.text.toString()
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
                 startActivity(intent)
             }
+
         }
 
     }

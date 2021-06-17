@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 // 뒤로가기 눌러도 다시 이 화면으로 안 돌아옴
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                // [재호 - 이거 필요한가요~?]
+                // [재호 - 이거 필요한가요~?][원재님이 넣으신거같아요]
                 // intent로 MainActivity에 email전달
 //                intent.putExtra("email", reviseEmail(binding.editTextEmail.text.toString()))
 
