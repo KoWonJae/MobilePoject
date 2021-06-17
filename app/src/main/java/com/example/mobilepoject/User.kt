@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 //    constructor(): this("", "", "")
 //}
 @Parcelize
-class User(var uid:String, var username:String, var phoneNumber:String, var email:String , var selfinfo:String, var tag:String, var profileImageUrl: String): Parcelable {
-    constructor():this("", "", "", "", "", "", "")
+class User(var uid:String, var username:String, var phoneNumber:String, var email:String , var selfinfo:String, var tag:String, var profileImageUrl: String, var site: String, var career:String): Parcelable {
+    constructor():this("", "", "", "", "", "", "", "", "")
 }

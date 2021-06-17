@@ -1,6 +1,7 @@
 package com.example.mobilepoject
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobilepoject.databinding.ActivityRecycleProfileBinding
@@ -33,6 +34,8 @@ class RecycleProfileActivity : AppCompatActivity() {
         val selfinfo = intent.getStringExtra("selfinfo")
         val tag = intent.getStringExtra("tag")
         val profileImageUrl = intent.getStringExtra("profileImg")
+        val career = intent.getStringExtra("career")
+        val site = intent.getStringExtra("site")
 
         binding.apply {
             pname.setText(username)
@@ -40,14 +43,23 @@ class RecycleProfileActivity : AppCompatActivity() {
             pnumber.setText(phoneNumber)
             precord.setText(selfinfo)
             ptag.setText(tag)
+            psite.setText(site)
+            pcareer.setText(career)
+
             if(profileImageUrl != ""){
                 Picasso.get().load(profileImageUrl).into(pimage)
             }
 
             startChatBtn.setOnClickListener {
-                val tempUser = User(uid!!, username!!, phoneNumber!!, email!!, selfinfo!!, tag!!, profileImageUrl!!)
+                val tempUser = User(uid!!, username!!, phoneNumber!!, email!!, selfinfo!!, tag!!, profileImageUrl!!, career!!, site!!)
                 val intent = Intent(this@RecycleProfileActivity, ChatActivity::class.java)
                 intent.putExtra(USER_KEY, tempUser)
+                startActivity(intent)
+            }
+
+            psite.setOnClickListener {
+                val siteurl = psite.text.toString()
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
                 startActivity(intent)
             }
         }

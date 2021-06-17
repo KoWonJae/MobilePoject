@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
                         precord.setText(currentUser.child("selfinfo").value.toString()                            )
                         pnumber.setText(currentUser.child("phoneNumber").value.toString()                            )
                         ptag.setText(currentUser.child("tag").value.toString())
+                        pcareer.setText(currentUser.child("career").value.toString())
+                        psite.setText(currentUser.child("site").value.toString())
 
 //                        pemail.setText(snapshot.child(uid).child("email").value.toString())
 //                        pname.setText(snapshot.child(uid).child("name").value.toString())

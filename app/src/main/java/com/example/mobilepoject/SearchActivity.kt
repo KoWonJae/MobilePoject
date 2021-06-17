@@ -54,6 +54,8 @@ class SearchActivity : AppCompatActivity() {
                     intent.putExtra("selfinfo", searchProfile.selfinfo)
                     intent.putExtra("tag", searchProfile.tag)
                     intent.putExtra("profileImg", searchProfile.profileImageUrl)
+                    intent.putExtra("site", searchProfile.site)
+                    intent.putExtra("career", searchProfile.career)
                     startActivity(intent)
 //                    Toast.makeText(this@SearchActivity, adapter.getItem(positon).name, Toast.LENGTH_SHORT).show()
 //                    val intent = Intent(this@SearchActivity, RecycleProfileActivity::class.java)
@@ -107,6 +109,8 @@ class SearchActivity : AppCompatActivity() {
                             intent.putExtra("record", searchProfile.selfinfo)
                             intent.putExtra("tag", searchProfile.tag)
                             intent.putExtra("profileImg", searchProfile.profileImageUrl)
+                            intent.putExtra("site", searchProfile.site)
+                            intent.putExtra("career", searchProfile.career)
 //                            intent.putExtra("my_datas", adapter.getItem(positon))
 //                            intent.putExtra("my_data", adapter.getItem(positon).name);
 //                            intent.putExtra("grade", adapter.getItem(positon).email);

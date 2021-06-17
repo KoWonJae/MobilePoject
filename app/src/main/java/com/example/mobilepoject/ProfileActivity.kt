@@ -87,6 +87,9 @@ class ProfileActivity : AppCompatActivity() {
                             precord.setText(currentUser.child("selfinfo").value.toString()                            )
                             pnumber.setText(currentUser.child("phoneNumber").value.toString()                            )
                             ptag.setText(currentUser.child("tag").value.toString())
+                            pcareer.setText(currentUser.child("career").value.toString())
+                            psite.setText(currentUser.child("site").value.toString())
+
 
 //                            pname.setText(snapshot.child(uid).child("name").value.toString())
 //                            pemail.setText(snapshot.child(uid).child("email").value.toString())
@@ -164,7 +167,7 @@ class ProfileActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val item = User(uid, binding.pname.text.toString()
             ,binding.pnumber.text.toString(), binding.pemail.text.toString(),
-            binding.precord.text.toString(), binding.ptag.text.toString(), profileImageUrl)
+            binding.precord.text.toString(), binding.ptag.text.toString(), profileImageUrl, binding.psite.text.toString(), binding.pcareer.text.toString())
         rdb.child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(item)//ID
         Toast.makeText(this@ProfileActivity,"프로필 저장", Toast.LENGTH_SHORT).show()
     }
