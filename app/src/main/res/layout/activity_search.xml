@@ -16,17 +16,16 @@
         <Spinner
             android:id="@+id/spinner"
             android:spinnerMode="dropdown"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
             />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
             android:background="@drawable/round_btn"
+            android:layout_weight="1"
             android:padding="10dp"
             android:hint="검색어를 입력하세요."
             android:textColor="@color/white"
@@ -36,10 +35,9 @@
 
         <Button
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:background="@drawable/round_btn"
             android:text="검색" />
     </LinearLayout>
