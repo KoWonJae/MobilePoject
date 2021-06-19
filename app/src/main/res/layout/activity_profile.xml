@@ -242,14 +242,6 @@
                 android:textSize="15dp" />
         </LinearLayout>
 
-<!--        <Button-->
-<!--            android:id="@+id/add_btn"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:background="@drawable/round_btn"-->
-<!--            android:text="목록 추가" />-->
-
     </LinearLayout>
 
     <Button
@@ -261,77 +253,3 @@
         android:text="저장" />
 
 </LinearLayout>
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".ProfileActivity">-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:srcCompat="@tools:sample/avatars" />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="300sp"-->
-<!--        android:layout_marginTop="216dp"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pname"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:text="Name" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pnumber"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:text="number" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pemail"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:text="email" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/precord"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:text="record" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/ptag"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:text="tag" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/button"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="save" />-->
-<!--    </LinearLayout>-->
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

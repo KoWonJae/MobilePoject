@@ -17,7 +17,6 @@ class RecycleProfileActivity : AppCompatActivity() {
     lateinit var binding : ActivityRecycleProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_recycle_profile)
         binding = ActivityRecycleProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.title = "프로필"
@@ -25,7 +24,6 @@ class RecycleProfileActivity : AppCompatActivity() {
     }
 
     fun init(){
-//        va intent = new Intent(ReceiverActivity.this, InputActivity2.class)
         val intent = getIntent()
         val uid = intent.getStringExtra("uid")
         val username = intent.getStringExtra("username")
@@ -61,7 +59,6 @@ class RecycleProfileActivity : AppCompatActivity() {
             }
 
             psite.setOnClickListener {
-                // {psite EditText에서 TextView로 바꿨습니다.}
                 val siteurl = psite.text.toString()
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
                 startActivity(intent)

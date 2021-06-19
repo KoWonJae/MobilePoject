@@ -19,14 +19,6 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var binding : ActivityRegisterBinding
     lateinit var rdb :DatabaseReference
 
-    // 회원가입할 때 이미지 선택 안하면 지우고 하면 다시 살리면 됨 (지울지 살릴지?)
-//    var selectedPhotoUri: Uri? = null
-//    // startActivityForResult가 이걸로 바뀜
-//    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-//            result -> binding.photoBtn.setImageURI(result.data?.data)
-//        selectedPhotoUri = result.data?.data
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -37,14 +29,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
-
-        // 갤러리에서 이미지 선택 (지울지 살릴지?)
-//        binding.photoBtn.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.type = "image/*"
-//            // startActivityForResult가 이걸로 바뀜
-//            getContent.launch(intent)
-//        }
 
         binding.buttonRegister.setOnClickListener {
             // 새로만들 계정의 아이디 비밀번호를 입력받음
@@ -70,54 +54,21 @@ class RegisterActivity : AppCompatActivity() {
                     return@addOnCompleteListener
                 }
 
-//                Log.d("Main", "계정 생성 성공 with uid: ${task.result!!.user?.uid}")
+                Log.d("Main", "계정 생성 성공 with uid: ${task.result!!.user?.uid}")
                 Toast.makeText(this, "계정 생성 성공.", Toast.LENGTH_LONG).show()
 
                 // 가입한 사용자의 임시 프로필을 만들어 데이터베이스에 삽입
 
-                //// [재호 - Profile 클래스 -> User 클래스로 변경. User 클래스가 Profile 클래스 내용 다 포함하고 있음.]
-//                val profile = Profile()
-//                profile.email = email
-//                profile.name = binding.nameEdit.text.toString()
-//                rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
-//                rdb.child(firebaseAuth?.currentUser!!.uid).setValue(profile)
-
                 val loginUser = firebaseAuth?.currentUser
 
                 // 회원정보 파이어베이스 데이터베이스에 등록(Firebase Database & Storage)
-//                saveUser()
                 saveUserToFirebaseDatabase()
 
             }.addOnFailureListener {
                 Toast.makeText(this@RegisterActivity, "계정 생성 실패: ${it.message}", Toast.LENGTH_SHORT).show()
-//                Log.d("Main", "계정 생성 실패: ${it.message}")
+                Log.d("Main", "계정 생성 실패: ${it.message}")
             }
     }
-
-    // 유저 등록 (지울지 살릴지?)
-//    private fun saveUser() {
-//        // 프로필 사진이 없으면 그냥 Database에만 추가
-//        if(selectedPhotoUri == null){
-//            saveUserToFirebaseDatabase()
-//        }
-//        // 프로필 사진이 있으면 Storage에도 추가, Database에도 추가
-//        else{
-//            val filename = UUID.randomUUID().toString()
-//            val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-//
-//            ref.putFile(selectedPhotoUri!!)
-//                .addOnSuccessListener {
-//                    Log.d("Register", "이미지 업로드 성공: ${it.metadata?.path}")
-//
-//                    ref.downloadUrl.addOnSuccessListener {
-//                        Log.d("Register", "파일 위치: $it")
-//
-//                        // 사진이 storage에 등록이 되면 firebase database에 유저 추가
-//                        saveUserToFirebaseDatabaseAndStorage(it.toString())
-//                    }
-//                }.addOnFailureListener {}
-//        }
-//    }
 
     // Firebase Database에 등록한 사람 추가 (no 사진)
     private fun saveUserToFirebaseDatabase() {
@@ -135,7 +86,7 @@ class RegisterActivity : AppCompatActivity() {
                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                 startActivity(intent)
             }.addOnFailureListener {
-//                Log.d("Register", "유저 등록 실패: ${it.message}")
+                Log.d("Register", "유저 등록 실패: ${it.message}")
             }
     }
 
@@ -156,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                 startActivity(intent)
             }.addOnFailureListener {
-//                Log.d("Register", "유저 등록 실패: ${it.message}")
+                Log.d("Register", "유저 등록 실패: ${it.message}")
             }
     }
 }

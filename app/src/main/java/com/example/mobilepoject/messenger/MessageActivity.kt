@@ -39,7 +39,6 @@ class MessageActivity : AppCompatActivity() {
 
             // 클릭시 채팅창 나오게 하기 (use with fetchMessagingUsers)
             adapter.setOnItemClickListener { item, view ->
-//                Log.d(TAG, "123")
                 val row = item as LatestMessageItem
 
                 val intent = Intent(this@MessageActivity, ChatActivity::class.java)
@@ -48,7 +47,6 @@ class MessageActivity : AppCompatActivity() {
             }
 
             fetchMe()
-//            checkUserLoggedIn()
 
             // [테스트용] Firebase에 등록된 모든 사용자 목록
 //            fetchUsers()
@@ -104,7 +102,6 @@ class MessageActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-//                    Log.d("message", it.toString())
                     val user = it.getValue(User::class.java)
                     if(user != null){
                         adapter.add(UserItem(user))
@@ -116,12 +113,10 @@ class MessageActivity : AppCompatActivity() {
                     val userItem = item as UserItem
 
                     val intent = Intent(view.context, ChatActivity::class.java)
-//                    intent.putExtra(USER_KEY, userItem.user.username)
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
                 }
 
-//                binding.recyclerViewMessage.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -146,32 +141,4 @@ class MessageActivity : AppCompatActivity() {
         })
     }
 
-    // 로그인 되어있는지 확인 (O : 채팅목록 페이지, X : 회원가입 페이지)
-//    private fun checkUserLoggedIn() {
-//        val uid = FirebaseAuth.getInstance().uid
-//        if(uid == null){
-//            val intent = Intent(this@MessageActivity, RegisterActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            startActivity(intent)
-//        }
-//    }
-
-//    // 메뉴 등록
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(com.google.firebase.database.R.menu.menu1, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    // 메뉴 설정 (로그아웃)
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item?.itemId){
-//            com.google.firebase.database.R.id.sign_out_menu -> {
-//                FirebaseAuth.getInstance().signOut()
-//                val intent = Intent(this@MessageActivity, RegisterActivity::class.java)
-//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                startActivity(intent)
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }

@@ -38,19 +38,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun init(){
-//        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
         rdb = FirebaseDatabase.getInstance().getReference("users/people")
         val query = rdb.limitToLast(50)
-//        val option = FirebaseRecyclerOptions.Builder<Profile>()
-//            .setQuery(query, Profile::class.java)
-//            .build()
         val option = FirebaseRecyclerOptions.Builder<User>()
             .setQuery(query, User::class.java)
             .build()
 
         binding.apply {
             fun clearInput(){
-                //pname.text.clear()
                 pemail.text.clear()
                 pnumber.text.clear()
                 ptag.text.clear()
@@ -73,7 +68,6 @@ class ProfileActivity : AppCompatActivity() {
             val uid = FirebaseAuth.getInstance().currentUser?.uid
             rdb.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //TODO("Not yet implemented")
                     binding.apply {
                         if(uid != null) {
                             val currentUser = snapshot.child(uid)
@@ -87,49 +81,23 @@ class ProfileActivity : AppCompatActivity() {
                             }
                             pname.setText(currentUser.child("username").value.toString())
                             pemail.setText(currentUser.child("email").value.toString())
-                            precord.setText(currentUser.child("selfinfo").value.toString()                            )
-                            pnumber.setText(currentUser.child("phoneNumber").value.toString()                            )
+                            precord.setText(currentUser.child("selfinfo").value.toString())
+                            pnumber.setText(currentUser.child("phoneNumber").value.toString())
                             ptag.setText(currentUser.child("tag").value.toString())
                             pcareer.setText(currentUser.child("career").value.toString())
                             psite.setText(currentUser.child("site").value.toString())
-
-
-//                            pname.setText(snapshot.child(uid).child("name").value.toString())
-//                            pemail.setText(snapshot.child(uid).child("email").value.toString())
-//                            precord.setText(snapshot.child(uid).child("selfinfo").value.toString()                            )
-//                            pnumber.setText(snapshot.child(uid).child("phoneNumber").value.toString()                            )
-//                            ptag.setText(snapshot.child(uid).child("tag").value.toString())
                         }
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    //TODO("Not yet implemented")
+
                 }
             })
 
             button.setOnClickListener {
-//                try {
-//                    val item = Profile(pname.text.toString()
-//                        ,pnumber.text.toString().toInt(), pemail.text.toString(),
-//                        precord.text.toString(), ptag.text.toString())
-//                    rdb.child(reviseEmail(pemail.text.toString())).setValue(item)//ID
-//                    Toast.makeText(this@ProfileActivity,"프로필 저장", Toast.LENGTH_SHORT).show()
-//
-//                } catch (e: java.lang.NumberFormatException){
-//                    Toast.makeText(this@ProfileActivity,"번호에 '-'를 제외한 숫자를 입력해주세요.", Toast.LENGTH_SHORT).show()
-//                }
-//                clearInput()
-
                 // 버튼을 누르면 editText text로 사용자의 데이터 변경
                 try {
-//                    val item = Profile(pname.text.toString()
-//                        ,pnumber.text.toString().toString(), pemail.text.toString(),
-//                        precord.text.toString(), ptag.text.toString())
-//                    rdb.child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(item)//ID
-//                    Toast.makeText(this@ProfileActivity,"프로필 저장", Toast.LENGTH_SHORT).show()
-
                     // 프로필 이미지 있는지 확인. 있으면 파이어베이스 storage에 저장
-            // --------------------------- [재호]아마 프로필 선택하는거 수정하려면 여기 건드려야 할건데 저는 이제 더는 모르겠어요..
                     var profileImageUrl = ""
 
                     // 프로필 사진 있으면 바꾸기 or 추가하기
@@ -142,7 +110,7 @@ class ProfileActivity : AppCompatActivity() {
                                 Log.d("Register", "이미지 업로드 성공: ${it.metadata?.path}")
 
                                 ref.downloadUrl.addOnSuccessListener {
-//                                    Log.d("Register", "파일 위치: $it")
+                                    Log.d("Register", "파일 위치: $it")
 
                                     profileImageUrl = it.toString()
 
@@ -159,7 +127,6 @@ class ProfileActivity : AppCompatActivity() {
                 } catch (e: java.lang.NumberFormatException){
                     Toast.makeText(this@ProfileActivity,"번호에 '-'를 제외한 숫자를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 }
-//                clearInput()
                 finish()
             }
 

@@ -36,12 +36,8 @@ class SearchActivity : AppCompatActivity() {
 
     private fun init(){
         layoutManager  = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
         rdb = FirebaseDatabase.getInstance().getReference("users/people")
         val query = rdb.limitToLast(50)
-//        val option = FirebaseRecyclerOptions.Builder<Profile>()
-//            .setQuery(query, Profile::class.java)
-//            .build()
         val option = FirebaseRecyclerOptions.Builder<User>()
             .setQuery(query, User::class.java)
             .build()
@@ -62,15 +58,6 @@ class SearchActivity : AppCompatActivity() {
                     intent.putExtra("site", searchProfile.site)
                     intent.putExtra("career", searchProfile.career)
                     startActivity(intent)
-//                    Toast.makeText(this@SearchActivity, adapter.getItem(positon).name, Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(this@SearchActivity, RecycleProfileActivity::class.java)
-//                    val newProfile = adapter.getItem(positon)
-//                    intent.putExtra("my_data", adapter.getItem(positon).name);
-//                    intent.putExtra("grade", adapter.getItem(positon).email);
-//                    intent.putExtra("phoneNumber", adapter.getItem(positon).phoneNumber);
-//                    intent.putExtra("record", adapter.getItem(positon).selfinfo);
-//                    intent.putExtra("tag", adapter.getItem(positon).tag);
-//                    startActivity(intent)
                 }
             }
         }
@@ -79,11 +66,6 @@ class SearchActivity : AppCompatActivity() {
         binding.apply {
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
-
-//            button2.setOnClickListener {
-//                val intent = Intent(this@SearchActivity, ProfileActivity::class.java)
-//                startActivity(intent)
-//            }
 
             // 검색 버튼 누르지 않아도 editText에 입력된 데이터를 포함한 사용자 검색
             editText.addTextChangedListener {
@@ -122,73 +104,8 @@ class SearchActivity : AppCompatActivity() {
                 }
                 adapter.startListening()
             }
-
-
-
-
-//            imageView.setOnClickListener{
-//                if(adapter!=null)
-//                    adapter.stopListening()
-////                val query1 = rdb.orderByChild("name").equalTo(editText.text.toString())
-////                val query = rdb.orderByChild("name").startAt(editText.text.toString())
-////                val query = rdb.orderByChild("name").
-////                val option1 = FirebaseRecyclerOptions.Builder<Profile>()
-////                    .setQuery(query1, Profile::class.java)
-////                    .build()
-//
-//                var query1 = rdb.orderByChild("username").equalTo(editText.text.toString())
-//                if(flag == 0) {
-//                    query1 = rdb.orderByChild("username").equalTo(editText.text.toString())
-//                } else if(flag == 1) {
-//                    query1 = rdb.orderByChild("tag").equalTo(editText.text.toString())
-//                }
-//
-//                //val query1 = rdb.orderByChild("username").equalTo(editText.text.toString())
-//                val option1 = FirebaseRecyclerOptions.Builder<User>()
-//                    .setQuery(query1, User::class.java)
-//                    .build()
-//                adapter = MyProfileAdapter(option1)
-//                recyclerView.adapter = adapter
-//                adapter.itemClickListener = object :MyProfileAdapter.OnItemClickListener{
-//                    override fun OnItemClick(view: View, positon: Int) {
-//                        binding.apply{
-////                            Toast.makeText(this@SearchActivity, adapter.getItem(positon).name, Toast.LENGTH_SHORT).show()
-//                            Toast.makeText(this@SearchActivity, adapter.getItem(positon).username, Toast.LENGTH_SHORT).show()
-//                            val intent = Intent(this@SearchActivity, RecycleProfileActivity::class.java)
-//                            val searchProfile = adapter.getItem(positon)
-//                            intent.putExtra("uid", searchProfile.uid)
-//                            intent.putExtra("my_data", searchProfile.username)
-//                            intent.putExtra("grade", searchProfile.email)
-//                            intent.putExtra("phoneNumber", searchProfile.phoneNumber)
-//                            intent.putExtra("record", searchProfile.selfinfo)
-//                            intent.putExtra("tag", searchProfile.tag)
-//                            intent.putExtra("profileImg", searchProfile.profileImageUrl)
-//                            intent.putExtra("site", searchProfile.site)
-//                            intent.putExtra("career", searchProfile.career)
-////                            intent.putExtra("my_datas", adapter.getItem(positon))
-////                            intent.putExtra("my_data", adapter.getItem(positon).name);
-////                            intent.putExtra("grade", adapter.getItem(positon).email);
-////                            intent.putExtra("phoneNumber", adapter.getItem(positon).phoneNumber);
-////                            intent.putExtra("record", adapter.getItem(positon).selfinfo);
-////                            intent.putExtra("tag", adapter.getItem(positon).tag);
-//
-//                            startActivity(intent)
-//                        }
-//                    }
-//                }
-//                adapter.startListening()
-//            }
-
         }
-//        adapter.itemClickListener = object :MyProfileAdapter.OnItemClickListener{
-//            override fun OnItemClick(view: View, positon: Int) {
-//                binding.apply{
-//                    profileName.setText(adapter.getItem(positon).pId.toString())
-//                    pNameEdit.setText(adapter.getItem(positon).pName.toString())
-//                    pQuantityEdit.setText(adapter.getItem(positon).pQuantity.toString())
-//                }
-//            }
-//        }
+
         //data search_word from edittext and query for searching by name of profile
         val search_word =findViewById<EditText>(R.id.editText).text.toString()
         //검색문

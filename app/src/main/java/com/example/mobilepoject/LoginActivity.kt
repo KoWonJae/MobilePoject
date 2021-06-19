@@ -55,10 +55,6 @@ class LoginActivity : AppCompatActivity() {
                 // 뒤로가기 눌러도 다시 이 화면으로 안 돌아옴
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                // [재호 - 이거 필요한가요~?][원재님이 넣으신거같아요]
-                // intent로 MainActivity에 email전달
-//                intent.putExtra("email", reviseEmail(binding.editTextEmail.text.toString()))
-
                 val uesrid = FirebaseAuth.getInstance().currentUser?.uid
                 startActivity(intent)
             }
@@ -75,12 +71,6 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth?.addAuthStateListener { firebaseAuthListener!! }
     }
 
-    // [재호 - 이거(reviseEmail 함수) 필요한가요~?]
-    fun reviseEmail(email :String) : String {
-        val rEmail = email.replace(".com", "")
-        return rEmail
-    }
-
     fun loginUser(email :String, password:String) {
         // 로그인 정보 확인하는 함수
         firebaseAuth?.signInWithEmailAndPassword(email, password)
@@ -90,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
                     firebaseAuth.addAuthStateListener(firebaseAuthListener)
 
                     val uid = firebaseAuth.uid
-//                    val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
                     // 파이어베이스 Profiles -> users 로 통합
                     val ref = FirebaseDatabase.getInstance().getReference("/users/people/$uid")
                     ref.addListenerForSingleValueEvent(object: ValueEventListener {

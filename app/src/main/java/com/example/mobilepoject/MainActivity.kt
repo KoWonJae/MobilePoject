@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
-//        rdb = FirebaseDatabase.getInstance().getReference("Profiles/people")
         // 파이어베이스 Profiles -> users 로 통합
         rdb = FirebaseDatabase.getInstance().getReference("users/people")
 
@@ -70,32 +69,17 @@ class MainActivity : AppCompatActivity() {
                         // 프로필 텍스트 넣기
                         pname.setText(currentUser.child("username").value.toString())
                         pemail.setText(currentUser.child("email").value.toString())
-                        precord.setText(currentUser.child("selfinfo").value.toString()                            )
-                        pnumber.setText(currentUser.child("phoneNumber").value.toString()                            )
+                        precord.setText(currentUser.child("selfinfo").value.toString())
+                        pnumber.setText(currentUser.child("phoneNumber").value.toString())
                         ptag.setText(currentUser.child("tag").value.toString())
                         pcareer.setText(currentUser.child("career").value.toString())
                         psite.setText(currentUser.child("site").value.toString())
-
-//                        pemail.setText(snapshot.child(uid).child("email").value.toString())
-//                        pname.setText(snapshot.child(uid).child("name").value.toString())
-//                        precord.setText(snapshot.child(uid).child("selfinfo").value.toString())
-//                        pnumber.setText(snapshot.child(uid).child("phoneNumber").value.toString())
-//                        ptag.setText(snapshot.child(uid).child("tag").value.toString())
                     }
                 }
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
-
-//        var userEmail = intent.getStringExtra("email")
-//        binding.pemail.setText(userEmail)
-//        val query1 = rdb.orderByChild("email").equalTo(userEmail)
-//        val rdb2 = FirebaseDatabase.getInstance().getReference("Profiles/people/kwj12132@naver").child("email")
-//        print(rdb2)
-
-//        val query = rdb.child(pname.text.toString()).child("name")
-
 
     }
 

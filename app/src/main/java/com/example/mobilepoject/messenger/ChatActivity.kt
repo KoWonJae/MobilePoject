@@ -41,11 +41,9 @@ class ChatActivity : AppCompatActivity() {
         binding.apply {
             recyclerviewChat.adapter = adapter
 
-//            val username = intent.getStringExtra(MessageActivity.USER_KEY)
             toUser = intent.getParcelableExtra<User>(MessageActivity.USER_KEY)
             supportActionBar?.title = toUser?.username
 
-//            setDummyData()
             getPrevMessages()
 
             sendChatBtn.setOnClickListener {
@@ -109,7 +107,6 @@ class ChatActivity : AppCompatActivity() {
             val user = intent.getParcelableExtra<User>(MessageActivity.USER_KEY)
             val toId = user!!.uid
 
-//            val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
             val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
 
             val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
@@ -131,14 +128,6 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    // [임시]로 만든 채팅 더미 데이터
-//    private fun setDummyData() {
-//        val adapter = GroupAdapter<GroupieViewHolder>()
-//        adapter.add(ChatFromItem("From Message......"))
-//        adapter.add(ChatToItem("To Message\nTo Message..."))
-//
-//        binding.recyclerviewChat.adapter = adapter
-//    }
 }
 
 class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){

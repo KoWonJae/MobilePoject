@@ -9,8 +9,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.squareup.picasso.Picasso
 
-//class MyProfileAdapter(options: FirebaseRecyclerOptions<Profile>)
-//    : FirebaseRecyclerAdapter<Profile, MyProfileAdapter.ViewHolder>(options) {
 class MyProfileAdapter(options: FirebaseRecyclerOptions<User>)
     : FirebaseRecyclerAdapter<User, MyProfileAdapter.ViewHolder>(options) {
 
@@ -33,17 +31,8 @@ class MyProfileAdapter(options: FirebaseRecyclerOptions<User>)
         return ViewHolder(view)
     }
 
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Profile) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: User) {
         holder.binding.apply {
-//            profileName.text = model.name.toString()
-//            profilephonenumber.text = model.phoneNumber.toInt()
-//            profilegrade.text = model.grade.toString()
-//            profilerecord.text = model.record.toString()
-//            profiletag.text = model.tag.toString()
-//            productid.text = model.pId.toString()
-//            productname.text = model.pName.toString()
-//            productquantity.text = model.pQuantity.toString()
             profileName.text = model.username
             profileTag.text = model.tag
             if(model.profileImageUrl != ""){
