@@ -62,7 +62,6 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-
         binding.apply {
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
@@ -72,6 +71,7 @@ class SearchActivity : AppCompatActivity() {
                 if(adapter!=null)
                     adapter.stopListening()
 
+                // editText의 입력으로 시작하는 사용자 검색
                 var query1 = rdb.orderByChild("username").startAt(editText.text.toString()).endAt(editText.text.toString()+"\uFFFF")
                 if(flag == 0) {
                     query1 = rdb.orderByChild("username").startAt(editText.text.toString()).endAt(editText.text.toString()+"\uFFFF")
@@ -105,11 +105,6 @@ class SearchActivity : AppCompatActivity() {
                 adapter.startListening()
             }
         }
-
-        //data search_word from edittext and query for searching by name of profile
-        val search_word =findViewById<EditText>(R.id.editText).text.toString()
-        //검색문
-
     }
 
     private fun initSpinner() {

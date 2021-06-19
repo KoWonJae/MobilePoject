@@ -60,7 +60,7 @@ class RecycleProfileActivity : AppCompatActivity() {
 
             psite.setOnClickListener {
                 val siteurl = psite.text.toString()
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(siteurl))
                 startActivity(intent)
             }
 

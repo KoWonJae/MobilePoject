@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
                 // 뒤로가기 눌러도 다시 이 화면으로 안 돌아옴
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                val uesrid = FirebaseAuth.getInstance().currentUser?.uid
                 startActivity(intent)
             }
         }

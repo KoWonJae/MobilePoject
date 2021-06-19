@@ -89,25 +89,4 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d("Register", "유저 등록 실패: ${it.message}")
             }
     }
-
-    // Firebase Storage에 사진 업로드 + Database에 유저 추가
-    private fun saveUserToFirebaseDatabaseAndStorage(profileImageUrl: String) {
-        val user = User()
-        val uid = firebaseAuth.uid!!
-        user.uid = uid
-        user.email = binding.editTextEmail.text.toString()
-        user.username = binding.nameEdit.text.toString()
-        user.profileImageUrl = profileImageUrl
-
-        rdb = FirebaseDatabase.getInstance().getReference("users/people/$uid")
-        rdb.setValue(user)
-            .addOnSuccessListener {
-                Log.i("Register", "유저 등록됨")
-
-                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                startActivity(intent)
-            }.addOnFailureListener {
-                Log.d("Register", "유저 등록 실패: ${it.message}")
-            }
-    }
 }
