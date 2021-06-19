@@ -242,13 +242,13 @@
                 android:textSize="15dp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/add_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/round_btn"
-            android:text="목록 추가" />
+<!--        <Button-->
+<!--            android:id="@+id/add_btn"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@drawable/round_btn"-->
+<!--            android:text="목록 추가" />-->
 
     </LinearLayout>
 
