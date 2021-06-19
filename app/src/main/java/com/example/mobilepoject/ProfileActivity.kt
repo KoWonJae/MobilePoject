@@ -40,23 +40,8 @@ class ProfileActivity : AppCompatActivity() {
     private fun init(){
         rdb = FirebaseDatabase.getInstance().getReference("users/people")
         val query = rdb.limitToLast(50)
-        val option = FirebaseRecyclerOptions.Builder<User>()
-            .setQuery(query, User::class.java)
-            .build()
 
         binding.apply {
-            fun clearInput(){
-                pemail.text.clear()
-                pnumber.text.clear()
-                ptag.text.clear()
-                precord.text.clear()
-            }
-
-            fun reviseEmail(email :String) : String {
-                val rEmail = email.replace(".com", "")
-                return rEmail
-            }
-
             // 프로필 이미지 선택
             pimage.setOnClickListener {
                 val intent = Intent(Intent.ACTION_PICK)

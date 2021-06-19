@@ -57,10 +57,6 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d("Main", "계정 생성 성공 with uid: ${task.result!!.user?.uid}")
                 Toast.makeText(this, "계정 생성 성공.", Toast.LENGTH_LONG).show()
 
-                // 가입한 사용자의 임시 프로필을 만들어 데이터베이스에 삽입
-
-                val loginUser = firebaseAuth?.currentUser
-
                 // 회원정보 파이어베이스 데이터베이스에 등록(Firebase Database & Storage)
                 saveUserToFirebaseDatabase()
 
@@ -89,4 +85,5 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d("Register", "유저 등록 실패: ${it.message}")
             }
     }
+
 }

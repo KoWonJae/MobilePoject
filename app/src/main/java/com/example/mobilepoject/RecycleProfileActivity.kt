@@ -60,7 +60,9 @@ class RecycleProfileActivity : AppCompatActivity() {
 
             psite.setOnClickListener {
                 val siteurl = psite.text.toString()
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(siteurl))
+                val urlStr = "https://" + siteurl
+                // "www.~~.com" 으로 저장해야함
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlStr))
                 startActivity(intent)
             }
 

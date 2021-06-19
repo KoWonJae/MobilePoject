@@ -178,7 +178,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="사이트"
+                android:text="내 사이트"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
