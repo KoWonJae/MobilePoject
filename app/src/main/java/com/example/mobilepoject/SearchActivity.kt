@@ -90,6 +90,8 @@ class SearchActivity : AppCompatActivity() {
                             val intent = Intent(this@SearchActivity, RecycleProfileActivity::class.java)
                             val searchProfile = adapter.getItem(positon)
                             intent.putExtra("uid", searchProfile.uid)
+                            intent.putExtra("email", searchProfile.email)
+                            intent.putExtra("selfinfo", searchProfile.selfinfo)
                             intent.putExtra("my_data", searchProfile.username)
                             intent.putExtra("grade", searchProfile.email)
                             intent.putExtra("phoneNumber", searchProfile.phoneNumber)
